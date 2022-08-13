@@ -11,12 +11,11 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 
 app.get('/', async (req, res) => {
-    for (let i = 0; i < 20e8; i++) {
+    for (let i = 0; i < 1e8; i++) {
         // console.log('forking')
     }
-    // await sleep(10000);
     res.send(`Success - sent by process - ${process.pid}`)
-    cluster.Worker.kill
+    cluster.worker.kill();
 })
 
 
@@ -25,6 +24,16 @@ if (cluster.isMaster) {
         // console.log('forking')
         cluster.fork();
     }
+    cluster.on('exit', (worker, code, signal) => {
+        if (signal) {
+            console.log(`worker was killed by signal: ${signal}`);
+        } else if (code !== 0) {
+            console.log(`worker exited with error code: ${code}`);
+        } else {
+            cluster.fork()
+            console.log(`worker ${worker.process.pid} died and new worker forked`);
+        }
+    })
 
 } else {
     console.log('forked')
@@ -34,6 +43,6 @@ if (cluster.isMaster) {
 }
 
 
-// app.listen(3000, () => {
-//     console.log("App running in http://localhost:3000")
-// })
+app.listen(3000, () => {
+    console.log("App running in http://localhost:3000")
+})
