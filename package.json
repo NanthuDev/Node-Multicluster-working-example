@@ -1,0 +1,22 @@
+{
+  "name": "node---multicluster-working-example",
+  "version": "1.0.0",
+  "description": "Node - Multicluster working example",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NanthuDev/Node---Multicluster-working-example.git"
+  },
+  "author": "Nanthu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NanthuDev/Node---Multicluster-working-example/issues"
+  },
+  "homepage": "https://github.com/NanthuDev/Node---Multicluster-working-example#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
